@@ -232,11 +232,14 @@ export function drawAppScreen(appName) {
 
     const screenWidth = bounds.maxX - bounds.minX;
     const homeButtonSize = screenWidth * 0.1;
-    const homeButtonX = bounds.minX + screenWidth / 2 - homeButtonSize / 2;
-    const homeButtonY = bounds.maxY - homeButtonSize * 1.5;
+    const homeButtonRadius = homeButtonSize / 2;
+    const homeButtonCenterX = bounds.minX + screenWidth / 2;
+    const homeButtonCenterY = bounds.maxY - homeButtonSize * 1.5 + homeButtonRadius; // Center Y of the button
     ctx.strokeStyle = 'white';
     ctx.lineWidth = 2;
-    ctx.strokeRect(homeButtonX, homeButtonY, homeButtonSize, homeButtonSize);
+    ctx.beginPath();
+    ctx.arc(homeButtonCenterX, homeButtonCenterY, homeButtonRadius, 0, Math.PI * 2);
+    ctx.stroke();
 
     ctx.restore();
 

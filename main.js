@@ -36,10 +36,13 @@ function handleCanvasClick(e) {
     } else if (state.phoneState === 'in-app') {
         const screenWidth = state.screenBounds.maxX - state.screenBounds.minX;
         const homeButtonSize = screenWidth * 0.1;
-        const homeButtonX = state.screenBounds.minX + screenWidth / 2 - homeButtonSize / 2;
-        const homeButtonY = state.screenBounds.maxY - homeButtonSize * 1.5;
+        const homeButtonRadius = homeButtonSize / 2;
+        const homeButtonCenterX = state.screenBounds.minX + screenWidth / 2;
+        const homeButtonCenterY = state.screenBounds.maxY - homeButtonSize * 1.5 + homeButtonRadius;
 
-        if (x >= homeButtonX && x <= homeButtonX + homeButtonSize && y >= homeButtonY && y <= homeButtonY + homeButtonSize) {
+        const dx = x - homeButtonCenterX;
+        const dy = y - homeButtonCenterY;
+        if (dx * dx + dy * dy <= homeButtonRadius * homeButtonRadius) {
             state.phoneState = 'unlocked';
             state.currentApp = null;
             drawHomeScreen();
