@@ -197,8 +197,9 @@ export function drawMailApp(ctx, bounds) {
 
 export function drawClockApp(ctx, bounds) {
     const screenWidth = bounds.maxX - bounds.minX;
+    const screenHeight = bounds.maxY - bounds.minY;
     const centerX = bounds.minX + screenWidth / 2;
-    const centerY = bounds.minY + (bounds.maxY - bounds.minY) / 2;
+    const centerY = bounds.minY + screenHeight / 2;
 
     const now = new Date();
     const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -206,6 +207,8 @@ export function drawClockApp(ctx, bounds) {
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = `bold ${Math.floor(screenWidth/5)}px sans-serif`;
+    // Adjust font size to be more conservative to fit properly
+    const fontSize = Math.max(12, Math.floor(Math.min(screenWidth / 6, screenHeight / 4)));
+    ctx.font = `bold ${fontSize}px sans-serif`;
     ctx.fillText(timeString, centerX, centerY);
 }
