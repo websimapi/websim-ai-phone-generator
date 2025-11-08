@@ -2,40 +2,48 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f4f7f6;
     color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     margin: 0;
-    padding: 1rem;
-    box-sizing: border-box;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 #app {
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 100vw;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    text-align: center;
-    max-width: 600px;
-    width: 100%;
+    box-sizing: border-box;
 }
 
 h1 {
-    color: #111;
-    font-weight: 700;
+    display: none;
 }
 
 p {
-    color: #555;
-    line-height: 1.5;
+    display: none;
 }
 
 .controls {
     display: flex;
     gap: 10px;
-    margin: 20px 0;
+    margin-bottom: 20px;
     justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    z-index: 10;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.controls.hidden {
+    opacity: 0;
+    transform: translateY(-100px);
+    pointer-events: none;
 }
 
 #prompt-input {
@@ -77,10 +85,21 @@ p {
 }
 
 #loader {
-    margin-top: 20px;
-    font-size: 1.1rem;
-    color: #333;
-    font-weight: 500;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 .hidden {
@@ -88,17 +107,72 @@ p {
 }
 
 #result-container {
-    margin-top: 20px;
-    min-height: 300px;
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    position: relative;
 }
 
 #phone-canvas {
     max-width: 100%;
-    height: auto;
+    max-height: 100%;
+    height: 100%;
+    width: auto;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    cursor: pointer;
+}
+
+#reset-text {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    z-index: 20;
+}
+
+#reset-text.hidden {
+    display: none;
+}
+
+#reset-text:hover {
+    background-color: rgba(0,0,0,0.9);
+    transform: translateY(-2px);
+}
+
+#reset-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    padding: 10px;
+    margin: 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 9999;
+    line-height: 0; /* To remove extra space around the img */
+}
+
+#reset-btn.hidden {
+    display: none;
+}
+
+#reset-btn:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+#reset-btn img {
+    width: 24px;
+    height: 24px;
 }
 
