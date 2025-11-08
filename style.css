@@ -8,6 +8,8 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 #app {
@@ -123,6 +125,8 @@ p {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 #reset-text {
@@ -161,6 +165,8 @@ p {
     transition: background-color 0.3s;
     z-index: 9999;
     line-height: 0; /* To remove extra space around the img */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 #reset-btn.hidden {
